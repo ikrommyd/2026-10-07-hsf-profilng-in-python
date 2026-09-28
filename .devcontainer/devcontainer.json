@@ -1,0 +1,13 @@
+{
+  "name": "Profiling in Python",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+  "runArgs": ["--privileged", "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined"],
+  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y gdb && curl -fsSL https://pixi.sh/install.sh | bash && ~/.pixi/bin/pixi install --all",
+  "postStartCommand": "sudo sysctl -w kernel.perf_event_paranoid=1 kernel.yama.ptrace_scope=0",
+  "forwardPorts": [3000],
+  "customizations": {
+    "vscode": {
+      "extensions": ["ms-python.python"]
+    }
+  }
+}
