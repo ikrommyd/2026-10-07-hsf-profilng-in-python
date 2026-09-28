@@ -42,8 +42,37 @@ If you prefer to build samply yourself, [install Rust with rustup](https://www.r
 
 Enter the Python 3.15 environment with `source .venv/bin/activate` and the Python 3.14 environment with `source .venv-py314/bin/activate`.
 
-## Platform notes
+## Platform requirements
 
-* **macOS**: Tachyon, py-spy, and austin need `sudo` to read the memory of the profiled process. samply and memray do not. samply shows Python frames (`python -X perf`) only with Python 3.15.
-* **Linux**: samply may ask you to lower `kernel.perf_event_paranoid`; follow the instructions it prints.
-* **Windows**: Windows not supported. Please use [WSL2](https://learn.microsoft.com/en-us/windows/wsl/install).
+The profilers read the memory of another process, which the operating system restricts by default.
+
+### Linux
+
+* **samply**: allow access to perf events:
+  ```shell
+  echo 1 | sudo tee /proc/sys/kernel/perf_event_paranoid
+  ```
+* **Tachyon**, **py-spy**, and **memray attach**: allow attaching to your own processes:
+  ```shell
+  echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
+  ```
+* **austin**: run it with `sudo`.
+* **memray attach**: also needs `gdb` or `lldb` installed.
+
+Both settings reset when you reboot.
+
+### macOS
+
+* **Tachyon**, **py-spy**, and **austin**: run them with `sudo`.
+* **samply**: shows Python frames (`python -X perf`) only with Python 3.15. To attach to a running process, run `samply setup` once.
+* **memray attach**: needs `lldb`, from Apple's Command Line Tools (`xcode-select --install`), and may ask for your password.
+
+`sudo` may reset your `PATH` and pick up a different Python, so pass full paths, for example:
+
+```shell
+sudo "$(which python)" -m profiling.sampling run test.py
+```
+
+### Windows
+
+Windows is not supported. Please use [WSL2](https://learn.microsoft.com/en-us/windows/wsl/install).
