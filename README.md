@@ -44,9 +44,9 @@ Enter the Python 3.15 environment with `source .venv/bin/activate` and the Pytho
 
 ## Alternative: use GitHub Codespaces
 
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/ikrommyd/2026-10-07-hsf-profilng-in-python)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/ikrommyd/2026-10-07-hsf-profilng-in-python?quickstart=1)
 
-Click on the badge above to create a codespace with both `pixi` environments installed and the Linux settings below already applied. It uses your free monthly GitHub Codespaces hours.
+Click on the badge above to create a codespace, or resume the one you already have, with both `pixi` environments installed and the Linux settings below already applied. It uses your free monthly GitHub Codespaces hours.
 
 Once it's ready, open it in your local VS Code, which samply needs to load its profiles: click on **Codespaces** in the bottom-left corner and choose **Open in VS Code Desktop**. This needs the [GitHub Codespaces extension](https://marketplace.visualstudio.com/items?itemName=GitHub.codespaces).
 
