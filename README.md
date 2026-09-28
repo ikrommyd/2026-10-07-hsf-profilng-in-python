@@ -4,8 +4,8 @@ This repository contains everything you need to follow the "[HSF/IRIS-HEP Profil
 
 We use two environments:
 
-* **Python 3.14** (default): time profiling with [samply](https://github.com/mstange/samply), [py-spy](https://github.com/benfred/py-spy), and [austin](https://github.com/P403n1x87/austin), memory profiling with [memray](https://github.com/bloomberg/memray).
-* **Python 3.15**: time profiling with [Tachyon](https://docs.python.org/3.15/library/profiling.sampling.html), Python's new built-in sampling profiler. samply and memray are available here too.
+* **Python 3.15** (default): time profiling with [Tachyon](https://docs.python.org/3.15/library/profiling.sampling.html) and [samply](https://github.com/mstange/samply), memory profiling with [memray](https://github.com/bloomberg/memray).
+* **Python 3.14**: time profiling with [py-spy](https://github.com/benfred/py-spy) and [austin](https://github.com/P403n1x87/austin), which do not support Python 3.15 yet. samply and memray are available here too.
 
 ## Recommended: set up your environment with `pixi`
 
@@ -24,7 +24,7 @@ Then you can install both environments with:
 pixi install --all
 ```
 
-Enter the Python 3.14 environment with `pixi shell` and the Python 3.15 environment with `pixi shell -e py315`.
+Enter the Python 3.15 environment with `pixi shell` and the Python 3.14 environment with `pixi shell -e py314`.
 
 ## Alternative: set up your environment with `uv`
 
@@ -34,16 +34,16 @@ Then you can install both environments and a prebuilt samply binary with:
 
 ```shell
 uv sync && \
-UV_PROJECT_ENVIRONMENT=.venv-py315 uv sync --python 3.15 && \
+UV_PROJECT_ENVIRONMENT=.venv-py314 uv sync --python 3.14 && \
 curl --proto '=https' --tlsv1.2 -LsSf https://github.com/mstange/samply/releases/latest/download/samply-installer.sh | sh
 ```
 
 If you prefer to build samply yourself, [install Rust with rustup](https://www.rust-lang.org/tools/install) and replace the last line with `cargo install --locked samply`.
 
-Enter the Python 3.14 environment with `source .venv/bin/activate` and the Python 3.15 environment with `source .venv-py315/bin/activate`.
+Enter the Python 3.15 environment with `source .venv/bin/activate` and the Python 3.14 environment with `source .venv-py314/bin/activate`.
 
 ## Platform notes
 
-* **macOS**: Tachyon, py-spy, and austin need `sudo` to read the memory of the profiled process. samply and memray do not.
+* **macOS**: Tachyon, py-spy, and austin need `sudo` to read the memory of the profiled process. samply and memray do not. samply shows Python frames (`python -X perf`) only with Python 3.15.
 * **Linux**: samply may ask you to lower `kernel.perf_event_paranoid`; follow the instructions it prints.
 * **Windows**: Windows not supported. Please use [WSL2](https://learn.microsoft.com/en-us/windows/wsl/install).
