@@ -1,0 +1,14 @@
+[project]
+name = "2026-10-07-hsf-profiling-in-python"
+version = "0.1.0"
+requires-python = ">=3.14"
+dependencies = [
+    "memray",
+    "py-spy; python_version < '3.15'",
+    "austin-dist; python_version < '3.15'",
+    "austin-python; python_version < '3.15'",
+]
+
+[tool.uv]
+package = false
+python-preference = "only-managed"
