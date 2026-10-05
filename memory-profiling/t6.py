@@ -7,24 +7,13 @@ def load(n, rng):
     return pt, eta
 
 
-def smear(pt, rng):
-    return pt * rng.normal(1.0, 0.02, len(pt))
-
-
-def momentum(pt, eta):
-    return pt * np.cosh(eta)
-
-
-def select(p, eta):
-    return p[np.abs(eta) < 2.4]
-
-
 def main():
     rng = np.random.default_rng(5)
-    pt, eta = load(30_000_000, rng)
-    smeared = smear(pt, rng)
-    p = momentum(smeared, eta)
-    selected = select(p, eta)
+    n = 30_000_000
+    pt, eta = load(n, rng)
+    smeared = pt * rng.normal(1.0, 0.02, n)
+    p = smeared * np.cosh(eta)
+    selected = p[np.abs(eta) < 2.4]
     print(len(selected), round(float(selected.mean()), 1))
 
 

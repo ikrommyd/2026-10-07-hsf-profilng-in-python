@@ -51,18 +51,18 @@ memray stats t1_tracker.bin
 
 ### `t2.py`: the peak, and heap size versus resident size
 
-This script has three functions that allocate arrays. `ones` and `zeros` return their arrays, so they stay alive until the end. `temporary` allocates the biggest array but only uses it to compute a sum, so that array is freed as soon as the function returns.
+This script allocates three arrays. The first two, made with `np.ones` and `np.zeros`, stay alive until the end. The third one is the biggest, but it is only used to compute a sum and is deleted right after.
 
 ```shell
 memray run -o t2.bin t2.py
 memray flamegraph t2.bin
 ```
 
-The box of `temporary` is the widest, even though its array is gone by the end, because the array was alive when the memory use was highest. The flame graph always shows the moment of the peak, not the end of the script.
+The box of the third array is the widest, even though that array is gone by the end, because it was alive when the memory use was highest. The flame graph always shows the moment of the peak, not the end of the script.
 
 In the plot above the flame graph, the heap size and the resident size differ because of `np.zeros`. The array is allocated, so it counts for the heap size. But the operating system only provides its memory once something is written to it, and this script never writes to it.
 
-A flame graph made with `--temporal` adds a slider under the memory plot. Select a time range and the flame graph shows the peak inside that range, so you can see what was alive before or after `temporary` ran. The `-f` overwrites the flame graph from before.
+A flame graph made with `--temporal` adds a slider under the memory plot. Select a time range and the flame graph shows the peak inside that range, so you can see what was alive before the third array was allocated or after it was deleted. The `-f` overwrites the flame graph from before.
 
 ```shell
 memray flamegraph --temporal -f t2.bin
@@ -92,7 +92,7 @@ python t3.py
 memray attach <pid>
 ```
 
-To find memory that is never freed, record a normal profile and make the flame graph with `--leaks`. Instead of the peak, it shows what was still allocated when the script ended. Here that is the arrays in the `kept` list, and the flame graph points at `allocate`. You will also see some memory that Python itself and the imported modules never release. Look for your own functions.
+To find memory that is never freed, record a normal profile and make the flame graph with `--leaks`. Instead of the peak, it shows what was still allocated when the script ended. Here that is the arrays in the `kept` list, and the flame graph points at the `np.ones` call in `main`. You will also see some memory that Python itself and the imported modules never release. Look for your own functions.
 
 ```shell
 memray run -o t3.bin t3.py

@@ -16,16 +16,11 @@ def make_table(n):
     )
 
 
-def add_category(table):
-    table = table.copy()
-    table["category"] = table["channel"] + "_" + table["trigger"]
-    return table
-
-
 def main():
     table = make_table(3_000_000)
-    table = add_category(table)
-    print(table.groupby("category")["mass"].mean())
+    categorized = table.copy()
+    categorized["category"] = categorized["channel"] + "_" + categorized["trigger"]
+    print(categorized.groupby("category")["mass"].mean())
 
 
 if __name__ == "__main__":

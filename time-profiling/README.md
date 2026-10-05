@@ -20,7 +20,7 @@ Profile it with Tachyon. When the script ends, Tachyon prints a table with one r
 python -m profiling.sampling run t1.py
 ```
 
-In the `nsamples` column, the first number counts the samples where that line was the one executing, and the second counts the samples where it was anywhere on the call stack. `tottime` and `cumtime` are the same two numbers turned into seconds. The line with `time.sleep` in `main` is near the top, together with the loop in `python_loop` and the `sort` that `numpy_sort` calls.
+In the `nsamples` column, the first number counts the samples where that line was the one executing, and the second counts the samples where it was anywhere on the call stack. `tottime` and `cumtime` are the same two numbers turned into seconds. The line with `time.sleep` in `main` is near the top, together with the loop in `python_loop` and the `sort` function of NumPy.
 
 By default Tachyon measures wall-clock time, which includes waiting. With `--mode cpu` it only counts samples where the program was actually using the CPU. The sleep disappears from the table. Time that is there in wall-clock mode but not in CPU mode is time spent waiting, for example on I/O.
 

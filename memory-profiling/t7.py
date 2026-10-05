@@ -6,15 +6,11 @@ def read_file(index):
     return rng.normal(size=(1_500_000, 4))
 
 
-def preview(tracks, n=1_000):
-    return tracks[:n]
-
-
 def main():
     previews = []
     for index in range(15):
         tracks = read_file(index)
-        previews.append(preview(tracks))
+        previews.append(tracks[:1_000])
     combined = np.concatenate(previews)
     print(combined.shape, round(float(combined.mean()), 4))
 
