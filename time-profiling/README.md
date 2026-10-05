@@ -66,6 +66,13 @@ samply record --save-only -o t1.json.gz -- python -X perf t1.py
 samply load t1.json.gz
 ```
 
+Tachyon and samply take 1,000 samples per second by default, and `-r` changes that. For a script that runs for a few seconds the default is plenty. Raise the rate for scripts that finish in under a second, and lower it for jobs that run for a long time, so that the profile stays small. A higher rate also means more work for the profiler.
+
+```shell
+python -m profiling.sampling run -r 10khz t1.py
+samply record -r 10000 python -X perf t1.py
+```
+
 ### `t2.py`: live mode, attaching, and dumping
 
 This script runs the same loop and sort as `t1.py` in a long loop, like a job that takes a while.
@@ -148,7 +155,7 @@ python -m profiling.sampling run --diff-flamegraph t5-before.bin -o t5-diff.html
 
 Tachyon needs Python 3.15. On older versions, [py-spy](https://github.com/benfred/py-spy) covers the basics. It needs `sudo` on macOS.
 
-In the Python 3.14 environment, start `t2.py` and inspect it from a second terminal. `top` shows a live view, `dump` prints the current call stack once, and `record` writes a flame graph when you stop it with `Ctrl+C`.
+In the Python 3.14 environment, start `t2.py` and inspect it from a second terminal. `top` shows a live view, `dump` prints the current call stack once, and `record` writes a flame graph when you stop it with `Ctrl+C`. py-spy takes 100 samples per second by default, which `-r` also changes.
 
 ```shell
 python t2.py
