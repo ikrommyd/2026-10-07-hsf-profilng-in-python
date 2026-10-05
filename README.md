@@ -54,7 +54,7 @@ Enter the Python 3.15 environment with `pixi shell` and the Python 3.14 environm
 
 ## Material
 
-The snippets we write live are in `memory-profiling` and `time-profiling`. Run them from the top of the repository, since some of them read `data/SMHiggsToZZTo4L.root`.
+The snippets we write live are in `memory-profiling` and `time-profiling`. Run them from inside their folder, since some of them read `../data/SMHiggsToZZTo4L.root`.
 
 ## A recipe for profiling your own code
 
@@ -93,7 +93,7 @@ Both settings reset when you reboot.
 `sudo` may reset your `PATH` and pick up a different Python, so pass full paths, for example:
 
 ```shell
-sudo "$(which python)" -m profiling.sampling run time-profiling/t1.py
+sudo "$(which python)" -m profiling.sampling run t1.py
 ```
 
 ### Windows

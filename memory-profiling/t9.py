@@ -23,7 +23,7 @@ def dimuon_masses(events):
 
 
 def main():
-    events = load("data/SMHiggsToZZTo4L.root")
+    events = load("../data/SMHiggsToZZTo4L.root")
     selected = events[events.nMuon >= 2]
     masses = dimuon_masses(selected)
     counts, edges = np.histogram(ak.to_numpy(masses), bins=100, range=(0, 200))

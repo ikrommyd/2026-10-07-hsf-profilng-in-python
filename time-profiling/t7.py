@@ -36,7 +36,7 @@ def four_lepton_masses(leptons, min_pt):
 
 
 def main():
-    leptons = load("data/SMHiggsToZZTo4L.root")
+    leptons = load("../data/SMHiggsToZZTo4L.root")
     for min_pt in np.linspace(10.0, 30.0, 15):
         masses = four_lepton_masses(leptons, min_pt)
         print(f"{min_pt:5.1f} {len(masses):6d} {float(ak.mean(masses)):8.3f}")

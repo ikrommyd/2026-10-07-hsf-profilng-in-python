@@ -25,7 +25,7 @@ def dimuon_masses(events, scale):
 def main():
     histograms = {}
     for scale in np.linspace(0.98, 1.02, 21):
-        events = load("data/SMHiggsToZZTo4L.root")
+        events = load("../data/SMHiggsToZZTo4L.root")
         masses = dimuon_masses(events, scale)
         histograms[scale] = np.histogram(ak.to_numpy(masses), bins=100, range=(0, 200))[
             0
