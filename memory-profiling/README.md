@@ -99,6 +99,20 @@ memray run -o t3.bin t3.py
 memray flamegraph --leaks t3.bin
 ```
 
+The report opens with a warning. Python keeps the memory of small objects in its own pools and does not give it back when those objects are freed, so in a leak report that memory can look like a leak. The arrays in this script are far too big for those pools, so the result is right here. For a report without that doubt, tell memray to record every Python object with `--trace-python-allocators`.
+
+```shell
+memray run --trace-python-allocators -o t3-python.bin t3.py
+memray flamegraph --leaks t3-python.bin
+```
+
+The other way is to switch the pools off for the whole run with the `PYTHONMALLOC` environment variable. Python then asks the system for the memory of every object, and memray sees all of it.
+
+```shell
+PYTHONMALLOC=malloc memray run -o t3-malloc.bin t3.py
+memray flamegraph --leaks t3-malloc.bin
+```
+
 ### `t4.py`: temporary allocations
 
 This script does the same computation twice. `with_temporaries` uses a normal NumPy expression, which allocates new arrays for the intermediate results in every iteration and frees them right away. `with_buffer` reuses one array for all iterations.
