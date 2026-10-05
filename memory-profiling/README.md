@@ -148,6 +148,13 @@ memray run --trace-python-allocators -o t5-python.bin t5.py
 memray stats t5-python.bin
 ```
 
+The other way to see every object is the one from `t3.py`: switch the pools off with the `PYTHONMALLOC` environment variable. Python then asks the system for the memory of every float. `stats` reports about ten million allocations again, and this time it lists them as `MALLOC`.
+
+```shell
+PYTHONMALLOC=malloc memray run -o t5-malloc.bin t5.py
+memray stats t5-malloc.bin
+```
+
 By default memray shows only Python functions. With `--native`, the flame graph also shows the C functions inside Python and NumPy that asked for the memory. This tells you where inside a library an allocation happens. You get the function names, but usually no file names or line numbers, because the installed libraries do not ship that information.
 
 ```shell
