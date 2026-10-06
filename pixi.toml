@@ -15,6 +15,7 @@ pandas = "*"
 awkward = "*"
 uproot = "*"
 vector = "*"
+psutil = "*"
 
 [feature.py315]
 channels = [{ channel = "conda-forge/label/python_rc", priority = 1 }]
