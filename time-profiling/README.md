@@ -101,10 +101,10 @@ By default Tachyon only samples the main thread. `-a` samples all threads. In th
 python -m profiling.sampling run -a --flamegraph -o t3.html t3.py
 ```
 
-With `--mode gil`, Tachyon only counts samples where a thread holds the GIL. `python_loop` gets about half the time it has in wall-clock mode, because the two threads take turns. `numpy_sort` almost disappears, because the two sorts run at the same time without the GIL.
+With `--mode gil`, Tachyon only counts samples where a thread holds the GIL. Make a second flame graph in that mode and compare the two. `python_loop` gets about half the time it has in wall-clock mode, because the two threads take turns. `numpy_sort` almost disappears, because the two sorts run at the same time without the GIL.
 
 ```shell
-python -m profiling.sampling run -a --mode gil t3.py
+python -m profiling.sampling run -a --mode gil --flamegraph -o t3-gil.html t3.py
 ```
 
 `--gecko` writes the profile in the format of the Firefox Profiler. Load `t3.json` at [profiler.firefox.com](https://profiler.firefox.com). Every thread gets its own track, with markers that show when it held the GIL and when it was waiting for it.
