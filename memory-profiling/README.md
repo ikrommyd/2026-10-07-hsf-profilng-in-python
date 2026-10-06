@@ -170,3 +170,18 @@ Each exercise is a script that gives the right result but uses much more memory 
 * `t7.py`: only a small preview of each file is kept, yet the memory grows with every file. Find out what keeps it alive and fix it.
 * `t8.py`: find which columns and operations use most of the memory and reduce the peak.
 * `t9.py`: find where most of the memory goes in this dimuon mass calculation and reduce it.
+
+## Bonus
+
+`bonus.py` computes one NumPy expression with five arithmetic operations on arrays of 800 kB each. It uses `memray.Tracker` to record only that line.
+
+```shell
+python bonus.py
+memray stats bonus.bin
+```
+
+In the histogram of allocation sizes, look at how many allocations of 800 kB the expression made, and at the total memory allocated. How many would you expect if every operation made a new array?
+
+Depending on your operating system and on how your Python was installed, you get one of two different numbers. Find out which one you get and compare with someone who has a different setup. Then work out why NumPy can sometimes do with fewer allocations, and what stops it from doing so on some machines. The capture file also contains the native frames, so `memray flamegraph bonus.bin` shows which C functions asked for the memory.
+
+Delete `bonus.bin` before you run the script again, because memray does not overwrite files.
