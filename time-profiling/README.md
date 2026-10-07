@@ -8,8 +8,6 @@ Run everything from inside this folder, in the Python 3.15 environment unless st
 
 ## Showcase
 
-We write the scripts of this part together during the training. They will be added to this folder afterwards.
-
 ### `t1.py`: your first profile
 
 This script repeats three things: it sleeps for a second, runs a loop in pure Python, and sorts a NumPy array.
