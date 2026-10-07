@@ -109,7 +109,6 @@ Time profiling, all of them sampling profilers:
 * [pyinstrument](https://github.com/joerick/pyinstrument): prints a compact call tree in the terminal or as HTML.
 * [Scalene](https://github.com/plasma-umass/scalene): reports CPU time, memory, and GPU use per line.
 * [Austin](https://github.com/P403n1x87/austin): attaches from outside, like py-spy.
-* [perf](https://perfwiki.github.io/main/): the Linux profiler. It understands Python functions when you run `python -X perf`, see the [Python documentation](https://docs.python.org/3/howto/perf_profiling.html).
 * [speedscope](https://www.speedscope.app): a viewer for profiles written by other tools, such as py-spy.
 * [SnakeViz](https://jiffyclub.github.io/snakeviz/): a viewer for profiles in the pstats format, which pyinstrument and Tachyon (`--pstats -o profile.pstats`) can write.
 
@@ -118,3 +117,15 @@ Memory profiling:
 * [Fil](https://pythonspeed.com/fil/): shows what was allocated at the moment of peak memory.
 * [Pympler](https://github.com/pympler/pympler) and [objgraph](https://github.com/mgedmin/objgraph): inspect the Python objects that are alive, how big they are, and what refers to them.
 * [pytest-memray](https://pytest-memray.readthedocs.io): runs memray inside your tests and can fail a test that uses too much memory.
+
+Compiled code such as C++:
+
+* [samply](https://github.com/mstange/samply): the profiler from this training works on any program, not only on Python. Run `samply record ./your_program`.
+* [perf](https://perfwiki.github.io/main/): the Linux profiler. It also understands Python functions when you run `python -X perf`, see the [Python documentation](https://docs.python.org/3/howto/perf_profiling.html).
+* [Hotspot](https://github.com/KDAB/hotspot): a graphical viewer for `perf` recordings.
+* [Intel VTune](https://www.intel.com/content/www/us/en/developer/tools/oneapi/vtune-profiler.html): a profiler that goes down to CPU details such as cache misses.
+* [Instruments](https://developer.apple.com/tutorials/instruments): the profiler that comes with Xcode on macOS.
+* [Valgrind](https://valgrind.org): Memcheck finds leaks and invalid memory use, and Massif profiles the heap over time. It is very thorough, but it makes the program many times slower.
+* [heaptrack](https://github.com/KDE/heaptrack): records every allocation with its call stack, with much less slowdown.
+* [bytehound](https://github.com/koute/bytehound): a memory profiler for Linux with a web interface to explore the allocations.
+* [gperftools](https://github.com/gperftools/gperftools): CPU and heap profilers from Google that you link into your program.
