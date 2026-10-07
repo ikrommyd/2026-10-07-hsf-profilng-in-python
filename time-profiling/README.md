@@ -135,7 +135,7 @@ samply record python -X perf t4.py
 
 ## Exercises
 
-Each exercise is a script that gives the right result but is much slower than it needs to be. Profile it, find where the time goes, and change the script so that it does less work. The solutions will be added to this folder after the training.
+Each exercise is a script that gives the right result but is much slower than it needs to be. Profile it, find where the time goes, and change the script so that it does less work. Each exercise has a solution in `t<number>_solution.py`.
 
 * `t5.py`: find the call that takes almost all the time and avoid repeating it.
 * `t6.py`: find out why this group-by is slow and get the same result faster.
