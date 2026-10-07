@@ -162,7 +162,7 @@ memray flamegraph t5-native.bin
 
 ## Exercises
 
-Each exercise is a script that gives the right result but uses much more memory than it needs to. Record a profile, look at the flame graph, and find the widest boxes that belong to the script itself. Change the script, record again, and compare the peak with `memray stats`. The solutions will be added to this folder after the training.
+Each exercise is a script that gives the right result but uses much more memory than it needs to. Record a profile, look at the flame graph, and find the widest boxes that belong to the script itself. Change the script, record again, and compare the peak with `memray stats`. Each exercise has a solution in `t<number>_solution.py`.
 
 * `t6.py`: the two input arrays take 240 MB, but the peak is four times that. Find the lines that allocate more than you expect and bring the peak down.
 * `t7.py`: only a small preview of each file is kept, yet the memory grows with every file. Find out what keeps it alive and fix it.
