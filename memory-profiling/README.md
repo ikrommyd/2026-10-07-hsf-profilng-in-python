@@ -6,8 +6,6 @@ Run everything from inside this folder, in the Python 3.15 environment. See the 
 
 ## Showcase
 
-We write the scripts of this part together during the training. They will be added to this folder afterwards.
-
 ### `t1.py`: your first profile
 
 This script allocates an array of ones, waits half a second, allocates an array of zeros, waits again, adds the two into a third array, and waits once more. Each array takes 160 MB.
